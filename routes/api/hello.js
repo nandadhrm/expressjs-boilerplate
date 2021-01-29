@@ -14,14 +14,12 @@ const index = function (req, res, next) {
 
 router
   .route("/")
-  .post(validator.postHelloValidationRules(), validator.validate, (req, res, next) => {
+  .all(validator.postHelloValidationRules(), validator.validate, (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       response.res400(res, errors.array());
     } else {
-      helloController(req, res, next)
-        ? response.res200(res, "000", res.locals.message)
-        : response.res200(res, "001", "");
+      helloController(req, res, next);
     }
   });
 

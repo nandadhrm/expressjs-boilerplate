@@ -7,13 +7,13 @@ const index = function (req, res, next) {
 };
 
 router.use(
-  "/v1",
+  "/api",
   function (req, res, next) {
     // Use token or any validation here.
 
     next();
   },
-  require("./v1")
+  require("./api")
 );
 
 router.all("/", index);

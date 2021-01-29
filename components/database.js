@@ -5,12 +5,17 @@ const maindb = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.e
   port: process.env.DB_PORT,
   dialect: "postgres",
   timezone: "+07:00",
+  logging: false,
   define: {
-    freezeTableName: true, //disable pluarlize table name (added name table with s if false)
+    freezeTableName: true, //disable pluarlize table name
     timestamps: false,
   },
-  //logging: false,
 });
+
+maindb
+  .authenticate()
+  .then(() => console.log(`Connected to database : ${process.env.DB_HOST}:${process.env.DB_PORT}`))
+  .catch(() => console.error(`Unable to connect to the database!`));
 
 const users = require("../models/users");
 

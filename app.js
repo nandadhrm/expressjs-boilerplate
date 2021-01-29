@@ -1,4 +1,3 @@
-__BASEPATH = __dirname;
 require("dotenv").config();
 
 const express = require("express");
@@ -15,11 +14,11 @@ app.use((error, req, res, next) => {
     ? res.status(500).send({ message: "Invalid data structure" })
     : next();
 });
-app.disable('x-powered-by');
+app.disable("x-powered-by");
 app.use(routes);
 
 const PORT = process.env.SERVICE_PORT || 8080;
-const SERVICE = process.env.SERVICE_NAME || "Express JS"
+const SERVICE = process.env.SERVICE_NAME || "Express JS";
 app.listen(PORT, () => {
   console.log(`${SERVICE} running on port ${PORT}`);
 });
