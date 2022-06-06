@@ -2,9 +2,7 @@ const { body, param, query, validationResult } = require("express-validator");
 
 exports.postHelloValidationRules = () => {
   return [
-    // body("name").exists().withMessage("name is required"),
-    // body("from").exists().withMessage("from is required"),
-    // body("id").exists().withMessage("id is required"),
+    body("userId").exists().withMessage("user id is required!"),
   ];
 };
 

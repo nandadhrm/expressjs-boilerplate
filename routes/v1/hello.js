@@ -6,7 +6,7 @@ const validator = require("../../middlewares/validator");
 const express = require("express");
 const router = express.Router();
 
-const helloController = require("../../controllers/hello-controller");
+const helloController = require("../../controllers/Hello");
 
 const index = function (req, res, next) {
   response.res404(res);
@@ -15,12 +15,17 @@ const index = function (req, res, next) {
 router
   .route("/")
   .all(validator.postHelloValidationRules(), validator.validate, (req, res, next) => {
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      response.res400(res, errors.array());
-    } else {
-      helloController(req, res, next);
-    }
+      return response.res400(res, errors.array());
+    } 
+
+    helloController.hello(req, res).catch(error => {
+        console.error(error);
+        return response.res500(res, "Internal system error, please try again later!");
+    });
+
   });
 
 router.all("*", index);

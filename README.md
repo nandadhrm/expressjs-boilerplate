@@ -2,4 +2,4 @@
 Boilerplate for ExpressJS with Sequelize ORM
 
 # Disclaimer
-This project was a modified version from similar project by another users.
+The default database configuration is for MySQL, if you are using PostgreSQL, you may need to change the configuration.
