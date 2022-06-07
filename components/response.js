@@ -28,6 +28,15 @@ exports.res401 = (res, message = "Forbidden. You're not allowed to access this r
   res.end();
 };
 
+exports.res429 = (res, message = "Too many requests", retrySecs = 0) => {
+  const response = { message };
+  if(retrySecs) res.set('Retry-After', String(retrySecs));
+  res.status(429);
+  res.json(response);
+  res.end();
+};
+
+
 exports.res500 = (res, message = "Internal system failure. Please contact system administrator") => {
   const response = { message };
   res.status(500);
