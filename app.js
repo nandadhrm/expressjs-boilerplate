@@ -5,6 +5,8 @@ const app = express();
 const morganBody = require("morgan-body");
 const routes = require("./routes");
 const cors = require("cors");
+const compression = require("compression");
+const helmet = require("helmet");
 
 app.use(express.urlencoded({ extended: true, limit: "5mb" }));
 app.use(express.json({ limit: "5mb" }));
@@ -17,6 +19,11 @@ app.use((error, req, res, next) => {
     : next();
 });
 app.disable("x-powered-by");
+app.use(helmet());
+app.use(compression({
+  level: 6,
+  threshold: 0
+}))
 app.use(routes);
 
 const PORT = process.env.SERVICE_PORT || 8080;
